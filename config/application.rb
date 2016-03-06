@@ -1,6 +1,9 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+# There is an error in rails and this is the way to get it working
+# See: https://github.com/brandonhilkert/sucker_punch/issues/156
+require 'sucker_punch/async_syntax'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -13,7 +13,7 @@ group :development, :test do
 end
 group :development do
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  #gem 'spring'
 end
 gem 'bootstrap-sass'
 gem 'devise'
@@ -30,7 +30,7 @@ group :development do
   gem 'capistrano-rvm', '~> 0.1.1'
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'spring-commands-rspec'
+  #gem 'spring-commands-rspec'
 end
 group :development, :test do
   gem 'factory_girl_rails'
