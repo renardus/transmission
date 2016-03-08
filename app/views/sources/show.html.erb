@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @source.name %>
+</p>
+
+<p>
+  <strong>Wizard:</strong>
+  <%= @source.wizard_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @source.user_id %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @source.remarks %>
+</p>
+
+<%= link_to 'Edit', edit_source_path(@source) %> |
+<%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', sources_path %>

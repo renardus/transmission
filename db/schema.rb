@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306091746) do
+ActiveRecord::Schema.define(version: 20160306171439) do
+
+  create_table "descriptors", force: :cascade do |t|
+    t.integer  "source_id",  null: false
+    t.string   "name",       null: false
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "wizard_id"
+    t.integer  "user_id"
+    t.text     "remarks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sources", ["name"], name: "index_sources_on_name", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-8">
+    <table class="table table-striped table-bordered">
+      <caption><h1>Sources</h1></caption>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @sources.each do |source| %>
+          <tr>
+            <td><%= link_to source.name, source %></td>
+            <td><%= source.remarks %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-4">
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'New Source', new_source_path %>

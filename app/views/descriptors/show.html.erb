@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @descriptor.source_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @descriptor.name %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @descriptor.content %>
+</p>
+
+<%= link_to 'Edit', edit_descriptor_path(@descriptor) %> |
+<%= link_to 'Back', descriptors_path %>
