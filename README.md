@@ -46,3 +46,7 @@ Credits
 
 License
 -------
+
+Released under the GNU Version 3 license. See the [LICENSE][license] file for further details.
+
+[license]: https://github.com/renardus/transmission/blob/master/LICENSE
