@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306171439) do
+ActiveRecord::Schema.define(version: 20160309094713) do
 
   create_table "descriptors", force: :cascade do |t|
     t.integer  "source_id",  null: false
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20160306171439) do
     t.text     "remarks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "ancestry"
   end
 
+  add_index "sources", ["ancestry"], name: "index_sources_on_ancestry"
   add_index "sources", ["name"], name: "index_sources_on_name", unique: true
 
   create_table "users", force: :cascade do |t|

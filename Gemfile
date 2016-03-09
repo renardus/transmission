@@ -45,3 +45,4 @@ group :test do
 end
 gem 'wicked'
 gem 'simple_form'
+gem 'ancestry'
