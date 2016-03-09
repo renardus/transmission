@@ -1,6 +1,13 @@
-<h1>Editing Source</h1>
-
+<br/>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Edit Source</div>
+      <div class="panel-body">
 <%= render 'form' %>
-
-<%= link_to 'Show', @source %> |
-<%= link_to 'Back', sources_path %>
+      </div>
+    </div>
+    <%= link_to 'Cancel', @source, {role:'button', class:'btn btn-warning btn-sm active'} %> |
+    <%= link_to 'Back', sources_path %>
+  </div>
+</div>
