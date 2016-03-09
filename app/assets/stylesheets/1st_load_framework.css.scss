@@ -80,3 +80,17 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+// Navigation row white on blue.
+.navbar-inverse {
+  background-color: #337ab7;
+  color: white;
+}
+.navbar-nav > li > a {
+  color: white;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+.navbar-inverse .navbar-brand {
+  color: white;
+}
