@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Parts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Structure</th>
+      <th>Name</th>
+      <th>Value type</th>
+      <th>Default value</th>
+      <th>Possible values</th>
+      <th>Upper boundary</th>
+      <th>Lower boundary</th>
+      <th>Is required</th>
+      <th>Is fixed</th>
+      <th>Is in row</th>
+      <th>Hint</th>
+      <th>Placeholder</th>
+      <th>Label</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parts.each do |part| %>
+      <tr>
+        <td><%= part.structure_id %></td>
+        <td><%= part.name %></td>
+        <td><%= part.value_type %></td>
+        <td><%= part.default_value %></td>
+        <td><%= part.possible_values %></td>
+        <td><%= part.upper_boundary %></td>
+        <td><%= part.lower_boundary %></td>
+        <td><%= part.is_required %></td>
+        <td><%= part.is_fixed %></td>
+        <td><%= part.is_in_row %></td>
+        <td><%= part.hint %></td>
+        <td><%= part.placeholder %></td>
+        <td><%= part.label %></td>
+        <td><%= link_to 'Show', part %></td>
+        <td><%= link_to 'Edit', edit_part_path(part) %></td>
+        <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Part', new_part_path %>

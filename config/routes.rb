@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :categories do
+    resources :sources
+  end
+  resources :parts
   get 'after_creation/show'
 
   get 'after_creation/create'

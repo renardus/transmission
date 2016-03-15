@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h1><%= @category.name %> Category</h1></div>
+      <div class="panel-body">
+        <table class="table table-striped table-bordered">
+          <thead><tr class="success"><th>Remarks</th></tr></thead>
+          <tbody><tr> <td><%= @category.remarks %></td> </tr></tbody>
+        </table>
+<%- parts = @category.parts %>
+<%- unless parts.blank? %>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr class="success">
+              <th>Part</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Values</th>
+              <th>Upper Limit</th>
+              <th>Lower Limit</th>
+              <th>Required</th>
+              <th>Fixed</th>
+              <th>Retrieve</th>
+              <th>Hint</th>
+            </tr>
+          </thead>
+          <tbody>
+<%-   parts.each do |part| %>
+            <tr>
+              <td><%= link_to part.name, part %></td>
+              <td><%= part.value_type %></td>
+              <td><%= part.default_value %></td>
+              <td><%= part.possible_values %></td>
+              <td><%= part.upper_boundary %></td>
+              <td><%= part.lower_boundary %></td>
+              <td><%= part.is_required ? '+' : '-' %></td>
+              <td><%= part.is_fixed ? '+' : '-' %></td>
+              <td><%= part.is_in_row ? '+' : '-' %></td>
+              <td><%= part.hint %></td>
+            </tr>
+<%-   end %>
+          </tbody>
+        </table>
+<%- end %>
+<%- unless @category.sources.blank? %>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr class="success">
+              <th>Source</th>
+              <th>Hint</th>
+            </tr>
+          </thead>
+          <tbody>
+<%-   @category.sources.each do |source| %>
+            <tr>
+              <td><%= link_to source.name, source %></td>
+              <td><%= source.remarks %></td>
+            </tr>
+<%-   end %>
+          </tbody>
+        </table>
+<%- end %>
+        <%= link_to 'Add Source', new_category_source_path(@category) , {role:'button', class:'btn btn-primary active'} %>
+      </div>
+      <div class="panel-footer">  <%= link_to 'Back', categories_path %></div>
+    </div>
+  </div>
+</div>

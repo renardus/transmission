@@ -11,24 +11,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309094713) do
+ActiveRecord::Schema.define(version: 20160314114557) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "ancestry"
+    t.integer  "ancestry_depth",    default: 0
+    t.string   "names_depth_cache"
+    t.boolean  "retrievable"
+    t.string   "remarks"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
 
   create_table "descriptors", force: :cascade do |t|
     t.integer  "source_id",  null: false
+    t.integer  "part_id",    null: false
     t.string   "name",       null: false
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.string   "value_type"
+    t.string   "default_value"
+    t.text     "possible_values"
+    t.string   "upper_boundary"
+    t.string   "lower_boundary"
+    t.boolean  "is_required"
+    t.boolean  "is_fixed"
+    t.boolean  "is_in_row"
+    t.string   "hint"
+    t.string   "placeholder"
+    t.string   "label"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "sources", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "wizard_id"
+    t.string   "ancestry"
+    t.string   "name",        null: false
+    t.integer  "category_id", null: false
     t.integer  "user_id"
     t.text     "remarks"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "ancestry"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "sources", ["ancestry"], name: "index_sources_on_ancestry"

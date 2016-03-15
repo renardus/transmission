@@ -1,8 +1,22 @@
         <%= simple_form_for(@source, wrapper: :horizontal_form, html: {class: 'form-horizontal'}) do |f| %>
           <%= f.error_notification %>
 
+          <%- if not @source.category_id.blank? %>
+            <%= f.input :category_id, as: :hidden %>
+          <%= f.input :category_id, collection: @categories, disabled: true,
+            label_method: 'first', value_method: 'last', placeholder: 'Choose type' %>
+          <%- else %>
+            <%= f.input :category_id, collection: @categories,
+              label_method: 'first', value_method: 'last', placeholder: 'Choose type' %>
+          <%- end %>
           <%= f.input :name, placeholder: 'Enter source name' %>
           <%= f.input :remarks, placeholder: 'Enter explanatory text' %>
 
+          <%= f.simple_fields_for :descriptors do |sf| %>
+              <%#= descriptor_part(sf, sf.object) %>
+              <%- part = sf.object.part %>
+              <%= sf.input :content, label: part.name.capitalize, as: part.value_type.to_sym,
+       hint: part.hint, required: part.is_required, disabled: part.is_fixed %> 
+          <%- end %>
           <%= f.button :submit, class: 'btn btn-primary' %>
         <% end %>

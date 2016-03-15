@@ -15,10 +15,13 @@ class SourcesController < ApplicationController
   # GET /sources/new
   def new
     @source = Source.new
+    @source.category_id = params['category_id']
+    @categories = Category.order(:names_depth_cache).map { |c| ["-" * c.depth + c.name, c.id] }
   end
 
   # GET /sources/1/edit
   def edit
+    @categories = Category.order(:names_depth_cache).map { |c| [c.names_depth_cache, c.id] }
   end
 
   # POST /sources
@@ -28,6 +31,7 @@ class SourcesController < ApplicationController
 
     respond_to do |format|
       if @source.save
+        @source.get_descriptors
         format.html { redirect_to @source, notice: 'Source was successfully created.' }
         format.json { render :show, status: :created, location: @source }
       else
@@ -69,6 +73,6 @@ class SourcesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def source_params
-      params.require(:source).permit(:name, :wizard_id, :user_id, :remarks)
+      params.require(:source).permit(:name, :category_id, :user_id, :remarks)
     end
 end

@@ -1,0 +1,23 @@
+<%= simple_form_for(@part) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :structure_id %>
+    <%= f.input :name %>
+    <%= f.input :value_type %>
+    <%= f.input :default_value %>
+    <%= f.input :possible_values %>
+    <%= f.input :upper_boundary %>
+    <%= f.input :lower_boundary %>
+    <%= f.input :is_required %>
+    <%= f.input :is_fixed %>
+    <%= f.input :is_in_row %>
+    <%= f.input :hint %>
+    <%= f.input :placeholder %>
+    <%= f.input :label %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Structure:</strong>
+  <%= @part.structure_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @part.name %>
+</p>
+
+<p>
+  <strong>Value type:</strong>
+  <%= @part.value_type %>
+</p>
+
+<p>
+  <strong>Default value:</strong>
+  <%= @part.default_value %>
+</p>
+
+<p>
+  <strong>Possible values:</strong>
+  <%= @part.possible_values %>
+</p>
+
+<p>
+  <strong>Upper boundary:</strong>
+  <%= @part.upper_boundary %>
+</p>
+
+<p>
+  <strong>Lower boundary:</strong>
+  <%= @part.lower_boundary %>
+</p>
+
+<p>
+  <strong>Is required:</strong>
+  <%= @part.is_required %>
+</p>
+
+<p>
+  <strong>Is fixed:</strong>
+  <%= @part.is_fixed %>
+</p>
+
+<p>
+  <strong>Is in row:</strong>
+  <%= @part.is_in_row %>
+</p>
+
+<p>
+  <strong>Hint:</strong>
+  <%= @part.hint %>
+</p>
+
+<p>
+  <strong>Placeholder:</strong>
+  <%= @part.placeholder %>
+</p>
+
+<p>
+  <strong>Label:</strong>
+  <%= @part.label %>
+</p>
+
+<%= link_to 'Edit', edit_part_path(@part) %> |
+<%= link_to 'Back', parts_path %>

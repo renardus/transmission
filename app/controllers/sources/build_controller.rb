@@ -1,7 +1,7 @@
 class Sources::BuildController < ApplicationController
   include Wicked::Wizard
 
-  steps :add_details, :add_destination, :add_schedule
+  steps :add_details, :add_children, :add_schedule
 
   def show
     @source = Source.find(params[:source_id])
