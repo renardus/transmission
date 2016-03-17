@@ -1,33 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-md-4">
     <div class="panel panel-primary">
-      <div class="panel-heading"><h3>Sources</h3></div>
+      <div class="panel-heading"><h1>Sources</h1></div>
       <div class="panel-body">
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr class="success">
-              <th>Source</th>
-              <th>Remarks</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @sources.each do |source| %>
-              <tr>
-                <td><%= link_to source.name, source %></td>
-                <td><%= source.remarks %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <%= arranged_tree_as_list(@sources) do |source| %>
+          <%= link_to source.name, source %>
+        <% end %>
       </div>
     </div>
   </div>
-  <div class="col-sm-4">
-  </div>
 </div>
+
 
 <br>
 

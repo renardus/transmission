@@ -55,12 +55,14 @@ ActiveRecord::Schema.define(version: 20160314114557) do
 
   create_table "sources", force: :cascade do |t|
     t.string   "ancestry"
-    t.string   "name",        null: false
-    t.integer  "category_id", null: false
+    t.integer  "ancestry_depth",    default: 0
+    t.string   "names_depth_cache"
+    t.string   "name",                          null: false
+    t.integer  "category_id",                   null: false
     t.integer  "user_id"
     t.text     "remarks"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "sources", ["ancestry"], name: "index_sources_on_ancestry"

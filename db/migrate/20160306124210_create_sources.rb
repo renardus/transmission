@@ -2,6 +2,8 @@ class CreateSources < ActiveRecord::Migration
   def change
     create_table :sources do |t|
       t.string  :ancestry
+      t.integer :ancestry_depth, default: 0
+      t.string  :names_depth_cache
       t.string  :name, null: false
       t.integer :category_id, null: false
       t.integer :user_id

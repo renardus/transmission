@@ -5,8 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-#user = CreateAdminService.new.call
-#puts 'CREATED ADMIN USER: ' << user.email
+user = CreateAdminService.new.call
+puts 'CREATED ADMIN USER: ' << user.email
 
 # Create the source origins (=classes)
 #  Start with databases
@@ -22,26 +22,30 @@
 #
 #  For an Oracle configuration see:
 #    https://github.com/rsim/oracle-enhanced
-db = Category.create(name: 'Database')
-oracle = db.children.create name: 'Oracle'
-  oracle.parts.create name: 'adapter', value_type: 'string', default_value: 'oracle_enhanced', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: true, is_in_row: false, hint: '', placeholder: '', label: ''
-  oracle.parts.create name: 'database', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'database or Oracle specific format or TNS connection', placeholder: '//localhost:1521/xe', label: ''
-  oracle.parts.create name: 'username', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from Oracle admin', placeholder: 'user', label: ''
-  oracle.parts.create name: 'password', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from Oracle admin', placeholder: 'secret', label: ''
- table = oracle.children.create name: 'Table'
+dbsystem = Category.create(name: 'Database')
+  adapter = dbsystem.parts.create name: 'adapter', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: '', placeholder: '', label: ''
+oracle = dbsystem.sources.create name: 'Oracle', remarks: 'Abstract Category'
+  oracle.descriptors.create( part_id: adapter.id, name: adapter.name, content: 'oracle_enhanced' )
+mssql = dbsystem.sources.create name: 'MS SQL', remarks: 'Abstract Category'
+  mssql.descriptors.create( part_id: adapter.id, name: adapter.name, content: 'mssql' )
+mysql = dbsystem.sources.create name: 'MySQL', remarks: 'Abstract Category'
+  mysql.descriptors.create( part_id: adapter.id, name: adapter.name, content: 'mysql2' )
+
+db  = dbsystem.children.create name: 'Server'
+  db.parts.create name: 'database', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'database connection identifier', placeholder: 'database name', label: ''
+  db.parts.create name: 'host', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: false, is_fixed: false, is_in_row: false, hint: 'localhost or fqdn', placeholder: 'host or empty', label: ''
+  db.parts.create name: 'port', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: false, is_fixed: false, is_in_row: false, hint: 'number or empty', placeholder: '', label: ''
+  db.parts.create name: 'username', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from DB admin', placeholder: 'user', label: ''
+  db.parts.create name: 'password', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from DB admin', placeholder: 'secret', label: ''
+ table = db.children.create name: 'Table'
   table.parts.create name: 'table_name', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'qualified table name', placeholder: 'hr.hr_employees', label: ''
   table.parts.create name: 'primary_key', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: false, is_fixed: false, is_in_row: false, hint: 'if known', placeholder: '', label: ''
   table.parts.create name: 'sequence_name', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: false, is_fixed: false, is_in_row: false, hint: 'if known', placeholder: '', label: ''
 
-mssql  = db.children.create name: 'MS SQL'
-  mssql.parts.create name: 'adapter', value_type: 'string', default_value: 'mssql', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: true, is_in_row: false, hint: '', placeholder: '', label: ''
-
-mysql  = db.children.create name: 'MySQL'
-  mysql.parts.create name: 'adapter', value_type: 'string', default_value: 'mysql2', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: true, is_in_row: false, hint: '', placeholder: '', label: ''
-  mysql.parts.create name: 'database', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'database name', placeholder: 'users', label: ''
-  mysql.parts.create name: 'username', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from MySQL admin', placeholder: 'user', label: ''
-  mysql.parts.create name: 'password', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: false, is_in_row: false, hint: 'Get from MySQL admin', placeholder: 'secret', label: ''
 
 # Files are the other possibilities
 file = Category.create(name: 'File')
   file.parts.create name: 'directory', value_type: 'string', default_value: '', possible_values:'', upper_boundary: '', lower_boundary: '', is_required: true, is_fixed: true, is_in_row: false, hint: '', placeholder: '', label: ''
+
+# For some reason the before_save is not called when creating
+Category.all.each { |c| c.save }

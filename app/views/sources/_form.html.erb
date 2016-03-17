@@ -1,14 +1,17 @@
+<%# Because there are many ways in which this place can be reached %>
+<%- @categories = Category.order(:names_depth_cache).map { |c| [c.names_depth_cache, c.id] } %>
         <%= simple_form_for(@source, wrapper: :horizontal_form, html: {class: 'form-horizontal'}) do |f| %>
           <%= f.error_notification %>
+          <%= f.input :ancestry, as: :hidden %>
 
-          <%- if not @source.category_id.blank? %>
-            <%= f.input :category_id, as: :hidden %>
+<%- if @source.category_id.blank? %>
+          <%= f.input :category_id, collection: @categories,
+              label_method: 'first', value_method: 'last', placeholder: 'Choose type' %>
+<%- else %>
+          <%= f.input :category_id, as: :hidden %>
           <%= f.input :category_id, collection: @categories, disabled: true,
             label_method: 'first', value_method: 'last', placeholder: 'Choose type' %>
-          <%- else %>
-            <%= f.input :category_id, collection: @categories,
-              label_method: 'first', value_method: 'last', placeholder: 'Choose type' %>
-          <%- end %>
+<%- end %>
           <%= f.input :name, placeholder: 'Enter source name' %>
           <%= f.input :remarks, placeholder: 'Enter explanatory text' %>
 

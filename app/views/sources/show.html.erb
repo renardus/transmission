@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-7">
     <div class="panel panel-primary">
-      <div class="panel-heading"><h1>Source <%= @source.name %></h1></div>
+      <div class="panel-heading"><h1>Source <%= @source.fq_name %></h1></div>
       <div class="panel-body">
         <table class="table table-striped table-bordered">
           <thead><tr class="success"><th>Remarks</th></tr></thead>
@@ -28,9 +28,12 @@
         </table>
       </div>
       <div class="panel-footer">
-        <%= link_to 'Edit', edit_source_path(@source) %> |
-        <%= link_to 'Destroy', @source, method: :delete, data: { confirm: 'Are you sure?' } %> |
-        <%= link_to 'Back', sources_path %>
+        <%= link_to "Edit", edit_source_path(@source), {role:'button', class:'btn btn-warning active'} %> |
+        <%= link_to "Back", sources_path, {role:'button', class:'btn btn-success active'} %> |
+<%- @source.category.children.each do |child| %>
+        <%= link_to "Add #{child.name}", new_source_path(parent_id: @source.id, category_id: child.id) , {role:'button', class:'btn btn-primary active'} %> |
+<%- end %>
+        <%= link_to 'Destroy', @source, method: :delete, data: { confirm: 'Are you sure?' }, role:'button', class:'btn btn-danger active' %>
       </div>
     </div>
   </div>
