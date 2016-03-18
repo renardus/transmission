@@ -35,7 +35,7 @@ class SourcesController < ApplicationController
     respond_to do |format|
       if @source.save
         @source.get_descriptors
-        format.html { redirect_to @source, notice: 'Source was successfully created.' }
+        format.html { redirect_to edit_source_path(@source), notice: 'Source was successfully created.' }
         format.json { render :show, status: :created, location: @source }
       else
         format.html { render :new }

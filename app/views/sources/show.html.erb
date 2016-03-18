@@ -26,6 +26,24 @@
             <% end %>
           </tbody>
         </table>
+
+<%- unless @source.children.blank? %>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr class="success">
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @source.children.each do |child| %>
+              <tr>
+                <td><%= link_to("#{@source.names_depth_cache}/#{child.name}",child ) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<%- end %>
+
       </div>
       <div class="panel-footer">
         <%= link_to "Edit", edit_source_path(@source), {role:'button', class:'btn btn-warning active'} %> |
