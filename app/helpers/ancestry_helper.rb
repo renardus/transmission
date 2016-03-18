@@ -54,6 +54,7 @@ module AncestryHelper
       else
         li_classes += options[:li_class_children]
       end 
+      li_classes += [ "depth#{object.ancestry_depth}" ]
 
       if children.size > 0
         output << content_tag(:li, capture(object, &block) + arranged_tree_as_list(children, options, &block).html_safe,  :class => li_classes)
