@@ -4,16 +4,16 @@ class CreateParts < ActiveRecord::Migration
       t.integer :category_id
       t.string :name
       t.string :value_type
-      t.string :default_value
-      t.text :possible_values
-      t.string :upper_boundary
-      t.string :lower_boundary
-      t.boolean :is_required
-      t.boolean :is_fixed
-      t.boolean :is_in_row
-      t.string :hint
-      t.string :placeholder
-      t.string :label
+      t.string :default_value, default: ''
+      t.text :possible_values, default: ''
+      t.string :upper_boundary, default: ''
+      t.string :lower_boundary, default: ''
+      t.boolean :is_required, default: false
+      t.boolean :is_fixed, default: false
+      t.boolean :is_in_row, default: false
+      t.string :hint, default: ''
+      t.string :placeholder, default: ''
+      t.string :label, default: ''
 
       t.timestamps null: false
     end

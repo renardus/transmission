@@ -5,7 +5,8 @@ class CreateCategories < ActiveRecord::Migration
       t.string :ancestry
       t.integer :ancestry_depth, default: 0
       t.string :names_depth_cache
-      t.boolean :retrievable
+      t.boolean :retrievable, default: false
+      t.boolean :fertile, default: true
       t.string :remarks
 
       t.timestamps null: false

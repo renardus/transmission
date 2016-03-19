@@ -6,6 +6,7 @@ class CreateSources < ActiveRecord::Migration
       t.string  :names_depth_cache
       t.string  :name, null: false
       t.integer :category_id, null: false
+      t.boolean :fertile, default: true
       t.integer :user_id
       t.text    :remarks
 

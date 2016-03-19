@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 20160314114557) do
     t.string   "ancestry"
     t.integer  "ancestry_depth",    default: 0
     t.string   "names_depth_cache"
-    t.boolean  "retrievable"
+    t.boolean  "retrievable",       default: false
+    t.boolean  "fertile",           default: true
     t.string   "remarks"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
@@ -39,18 +40,18 @@ ActiveRecord::Schema.define(version: 20160314114557) do
     t.integer  "category_id"
     t.string   "name"
     t.string   "value_type"
-    t.string   "default_value"
-    t.text     "possible_values"
-    t.string   "upper_boundary"
-    t.string   "lower_boundary"
-    t.boolean  "is_required"
-    t.boolean  "is_fixed"
-    t.boolean  "is_in_row"
-    t.string   "hint"
-    t.string   "placeholder"
-    t.string   "label"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "default_value",   default: ""
+    t.text     "possible_values", default: ""
+    t.string   "upper_boundary",  default: ""
+    t.string   "lower_boundary",  default: ""
+    t.boolean  "is_required",     default: false
+    t.boolean  "is_fixed",        default: false
+    t.boolean  "is_in_row",       default: false
+    t.string   "hint",            default: ""
+    t.string   "placeholder",     default: ""
+    t.string   "label",           default: ""
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "sources", force: :cascade do |t|
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160314114557) do
     t.string   "names_depth_cache"
     t.string   "name",                          null: false
     t.integer  "category_id",                   null: false
+    t.boolean  "fertile"
     t.integer  "user_id"
     t.text     "remarks"
     t.datetime "created_at",                    null: false
