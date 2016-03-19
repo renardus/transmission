@@ -34,7 +34,7 @@ Getting Started
 Documentation and Support
 -------------------------
 
-See the wiki for further information.
+See the [wiki](https://github.com/renardus/transmission/wiki) for further information.
 
 Issues
 -------------
