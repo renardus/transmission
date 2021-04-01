@@ -46,3 +46,4 @@ end
 gem 'wicked'
 gem 'simple_form'
 gem 'ancestry'
+gem "actionview", ">= 5.2.4.2"
